@@ -1,6 +1,9 @@
 <template>
   <div :class="['container', { 'dark-theme': isDarkTheme }]">
-    <SidebarElement :isDarkTheme="isDarkTheme" :toggleTheme="toggleTheme" />
+    <SidebarElement
+      :isDarkTheme="isDarkTheme"
+      @update:isDarkTheme="updateTheme"
+    />
     <slot />
   </div>
 </template>
@@ -20,11 +23,10 @@ export default Vue.extend({
     };
   },
   created() {
-    const LOCAL_STORAGE_KEY = "darkTheme";
-    this.isDarkTheme = !!localStorage.getItem(LOCAL_STORAGE_KEY);
+    this.isDarkTheme = !!localStorage.getItem("darkTheme");
   },
   methods: {
-    toggleTheme(newValue: boolean) {
+    updateTheme(newValue: boolean) {
       this.isDarkTheme = newValue;
       localStorage.setItem("darkTheme", newValue ? "true" : "");
     },

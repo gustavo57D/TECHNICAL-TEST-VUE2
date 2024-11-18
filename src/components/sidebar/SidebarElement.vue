@@ -22,7 +22,7 @@
       </ul>
     </nav>
     <div class="foot">
-      <button class="theme-btn" @click="toggleThemeLocal">
+      <button class="theme-btn" @click="toggleTheme">
         <component :is="isDarkTheme ? 'LightElement' : 'DarkElement'" />
       </button>
       <button ref="togglebtnRef" class="toggle-btn" @click="toggleSidebar">
@@ -52,11 +52,10 @@ export default Vue.extend({
   },
   props: {
     isDarkTheme: Boolean,
-    toggleTheme: Function,
   },
   methods: {
-    toggleThemeLocal() {
-      this.toggleTheme(!this.isDarkTheme);
+    toggleTheme() {
+      this.$emit("update:isDarkTheme", !this.isDarkTheme);
     },
     toggleSidebar(): void {
       const sidebar = this.$refs.sidebarRef as HTMLElement;
@@ -73,7 +72,6 @@ export default Vue.extend({
       sidebar.classList.add("reduced");
       togglebtn.classList.add("rotate");
     }
-    // if (localStorage.getItem("darkTheme")) this.isDarkTheme = true;
   },
 });
 </script>
