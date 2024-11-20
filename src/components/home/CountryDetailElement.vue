@@ -24,15 +24,9 @@
           <span>{{ countryDetail?.continent.name }}</span>
         </div>
       </div>
-      <template v-if="loading">
-        <ExtraCountryDetailPlaceholder />
-      </template>
-      <template v-else-if="error">
-        <ExtraCountryDetailError />
-      </template>
-      <template v-else>
-        <ExtraCountryDetail :countryDetail="countryExtra" />
-      </template>
+      <ExtraCountryDetailPlaceholder :key="countryDetail.code" v-if="loading" />
+      <ExtraCountryDetailError v-else-if="error" />
+      <ExtraCountryDetail v-else :countryDetail="countryExtra" />
     </div>
   </aside>
 </template>
@@ -52,6 +46,17 @@ export default Vue.extend({
       error: null as string | null,
       countryExtra: {} as CountryDetail,
     };
+  },
+  watch: {
+    countryDetail: {
+      immediate: true,
+      handler() {
+        this.loading = true;
+        this.error = null;
+        this.countryExtra = {} as CountryDetail;
+        this.$apollo.queries.country.refetch();
+      },
+    },
   },
   props: {
     countryDetail: {

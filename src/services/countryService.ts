@@ -49,3 +49,21 @@ export const fetchPixabayAndFlags = async (
     countriesWithImages: processImages(countries, images, flagsObj),
   };
 };
+
+export const searchAndFilter = (
+  data: Country[],
+  search: string,
+  continents: string[]
+) => {
+  return data.filter((item) => {
+    const matchesSearch = item.name
+      .toString()
+      .toLowerCase()
+      .startsWith(search.toLowerCase());
+
+    const matchesContinent =
+      continents.length === 0 || continents.includes(item.continent.name);
+
+    return matchesSearch && matchesContinent;
+  });
+};

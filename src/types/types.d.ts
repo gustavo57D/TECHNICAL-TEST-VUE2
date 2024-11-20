@@ -36,3 +36,14 @@ export interface CountryDetail {
   languages: Language[];
   states: State[];
 }
+
+export interface HomeViewState {
+  countries: Country[];
+  loading: boolean;
+  error: string | null;
+  initialCountries: Country[];
+  selectedContinents: string[];
+  inputSearch: string;
+  inputRadioRef: HTMLInputElement | null;
+  countryDetail: Country | null;
+}
