@@ -331,6 +331,9 @@ li {
     }
   }
   .filter-main {
+    overflow-y: auto;
+  }
+  .filter-main > div {
     flex: 1;
     box-sizing: border-box;
     display: grid;
@@ -341,7 +344,6 @@ li {
     column-gap: 30px;
     row-gap: 4px;
     padding: 10px;
-    overflow-y: auto;
     .checkbox-card {
       display: flex;
       align-items: start;
